@@ -73,8 +73,11 @@ tk.Label(
 ano_entry = tk.Entry(frame, font=("Arial", 12), width=25)
 ano_entry.grid(row=1, column=1, padx=10, pady=5)
 
+botao_frame = tk.Frame(root, bg="#f0f0f0")
+botao_frame.pack(expand=True, fill=tk.NONE)
+
 botao_verificar = tk.Button(
-    root, 
+    botao_frame, 
     text="Verificar Idade", 
     font=("Arial", 12), 
     bg="#4CAF50",
@@ -87,7 +90,7 @@ botao_verificar = tk.Button(
 botao_verificar.pack(side=tk.LEFT, pady=10)
 
 botao_limpar = tk.Button(
-    root,
+    botao_frame,
     text="Limpar Campos",
     font=("Arial", 12),
     bg="#f44336",
