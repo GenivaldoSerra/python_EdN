@@ -33,7 +33,7 @@ def limpar_campos():
 
 root = tk.Tk()
 root.title("AVS - Age Verification System")
-root.geometry("400x300")
+root.geometry("600x400")
 root.resizable(False, False)
 root.configure(bg="#f0f0f0")
 
@@ -43,11 +43,33 @@ titulo.pack(pady=20)
 frame = tk.Frame(root, bg="#f0f0f0")
 frame.pack(pady=10)
 
-tk.Label(frame, text="Nome:", font=("Arial", 12), bg="#f0f0f0").grid(row=0, column=0, sticky="w", padx=10, pady=5)
+tk.Label(
+    frame, 
+    text="Nome:", 
+    font=("Arial", 12), 
+    bg="#f0f0f0").grid(
+        row=0, 
+        column=0, 
+        sticky="w", 
+        padx=10, 
+        pady=5
+    )
+
 nome_entry = tk.Entry(frame, font=("Arial", 12), width=25)
 nome_entry.grid(row=0, column=1, padx=10, pady=5)
 
-tk.Label(frame, text="Ano de Nascimento:", font=("Arial", 12), bg="#f0f0f0").grid(row=1, column=0, sticky="w", padx=10, pady=5)
+tk.Label(
+    frame, 
+    text="Ano de Nascimento:", 
+    font=("Arial", 12), 
+    bg="#f0f0f0").grid(
+        row=1, 
+        column=0, 
+        sticky="w", 
+        padx=10, 
+        pady=5
+    )
+
 ano_entry = tk.Entry(frame, font=("Arial", 12), width=25)
 ano_entry.grid(row=1, column=1, padx=10, pady=5)
 
@@ -60,8 +82,9 @@ botao_verificar = tk.Button(
     activebackground="#45a049",
     padx=20,
     pady=5,
+    command=verificar_idade
 )
-botao_verificar.pack(pady=20)
+botao_verificar.pack(side=tk.LEFT, pady=10)
 
 botao_limpar = tk.Button(
     root,
@@ -72,10 +95,20 @@ botao_limpar = tk.Button(
     activebackground="#d32f2f",
     padx=20,
     pady=5,
+    command=limpar_campos
 )
-botao_limpar.pack(pady=20)
+botao_limpar.pack(side=tk.LEFT, pady=10)
 
-rodape = tk.Label(root, text="© 2025 - AVS - Age Verification System", font=("Arial", 9), bg="#f0f0f0", fg="#888")
+rodape = tk.Label(
+    root, 
+    text="© 2025 - AVS - Age Verification System", 
+    font=("Arial", 9), 
+    bg="#f0f0f0", 
+    fg="#888"
+)
+
 rodape.pack(side=tk.BOTTOM, pady=10)
+
+nome_entry.focus()
 
 root.mainloop()
