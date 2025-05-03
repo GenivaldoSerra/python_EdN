@@ -63,3 +63,19 @@ botao_verificar = tk.Button(
 )
 botao_verificar.pack(pady=20)
 
+botao_limpar = tk.Button(
+    root,
+    text="Limpar Campos",
+    font=("Arial", 12),
+    bg="#f44336",
+    fg="white",
+    activebackground="#d32f2f",
+    padx=20,
+    pady=5,
+)
+botao_limpar.pack(pady=20)
+
+rodape = tk.Label(root, text="© 2025 - AVS - Age Verification System", font=("Arial", 9), bg="#f0f0f0", fg="#888")
+rodape.pack(side=tk.BOTTOM, pady=10)
+
+root.mainloop()
