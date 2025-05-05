@@ -8,6 +8,11 @@ def main():
         layout="centered"
     )
 
+    if "limpar_campos" in st.session_state and st.session_state.limpar_campos:
+        st.session_state.nome = ""
+        st.session_state.ano_nascimento = 2000
+        st.session_state.limpar_campos = False
+
     st.markdown("""
     <style>
     .title {
@@ -42,35 +47,31 @@ def main():
     col1, col2, col3 = st.columns([1, 2, 1])
 
     with col2:
-        nome = st.text_input("Digite seu nome: ", key="nome")
+        nome = st.text_input("Digite seu nome:", key="nome")
         ano_nascimento = st.number_input(
-            "Digite o ano de nascimento: ",
+            "Digite o ano de nascimento:",
             min_value=1900,
             max_value=datetime.now().year,
-            value=2000,
+            value=st.session_state.get("ano_nascimento", 2000),
             step=1,
             key="ano_nascimento"
         )
+
     col_btn1, col_btn2 = st.columns(2)
 
     with col_btn1:
-        verificar = st.button("Verificar Idade", 
-                            type="primary", 
-                            use_container_width=True)
+        verificar = st.button("Verificar Idade", use_container_width=True)
 
     with col_btn2:
-        limpar = st.button("Limpar Campos", 
-                        type="secondary", 
-                        use_container_width=True)
+        limpar = st.button("Limpar Campos", use_container_width=True)
 
     if verificar:
-        if not nome:
+        if not nome.strip():
             st.error("Por favor, digite seu nome.")
         else:
-            ano_atual = datetime.now().year
-            idade = ano_atual - ano_nascimento
+            idade = datetime.now().year - ano_nascimento
             status = "maior" if idade >= 18 else "menor"
-            
+
             st.markdown(f"""
             <div class='result-container {status}'>
                 <h3>Resultado:</h3>
@@ -78,13 +79,20 @@ def main():
                 <p>Você é <b>{status} de idade</b>.</p>
             </div>
             """, unsafe_allow_html=True)
+
     if limpar:
-        st.session_state["nome"] = ""
-        st.session_state["ano_nascimento"] = 2000
+        st.session_state.limpar_campos = True
         st.rerun()
 
     st.markdown("<p class='footer'>© 2025 - AVS - Age Verification System</p>", unsafe_allow_html=True)
 
-    
-if __name__ == '__main__':
+if __name__ == "__main__":
+
+    if "nome" not in st.session_state:
+        st.session_state.nome = ""
+    if "ano_nascimento" not in st.session_state:
+        st.session_state.ano_nascimento = 2000
+    if "limpar_campos" not in st.session_state:
+        st.session_state.limpar_campos = False
+
     main()
