@@ -42,3 +42,55 @@ def main():
     }
     </style>
     """, unsafe_allow_html=True)
+
+    st.markdown('<h1 class="title">👶 Classificação Etária 👶</h1>', unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+        nome = st.text_input("Digite seu nome:", key="nome")
+        ano_nascimento = st.number_input(
+            "Digite o ano de nascimento:",
+            min_value=1900,
+            max_value=datetime.now().year,
+            value=st.session_state.get("ano_nascimento", 1900),
+            step=1,
+            key="ano_nascimento"
+        )
+
+    col_btn1, col_btn2 = st.columns(2)
+
+    with col_btn1:
+        verificar_idade_btn = st.button("Verificar Idade", use_container_width=True, key="verificar_idade_btn")
+    
+    with col_btn2:
+        limpar_campos = st.button("Limpar Campos", use_container_width=True, key="limpar_campos_btn")
+    
+    if verificar_idade_btn:
+        if not nome:
+            st.error("Por favor, insira seu nome.")
+        else:
+            idade = datetime.now().year - ano_nascimento
+            if idade >= 65:
+                st.success(f"Olá {nome}, com a idade de {idade} anos, você é um idoso.")
+            elif idade >= 18:
+                st.success(f"Olá {nome}, com a idade de {idade} anos, você é adulto.")
+            elif idade >= 12:
+                st.success(f"Olá {nome}, com a idade de {idade} anos, você é adolescente.")
+            elif idade >= 3:
+                st.success(f"Olá {nome}, com a idade de {idade} anos, você é criança.")
+            else:
+                st.success(f"Olá {nome}, com a idade de {idade} anos, você é um bebê.")
+
+    if limpar_campos:
+        st.session_state.limpar_campos = True
+        st.rerun()
+
+if __name__ == "__main__":
+    if "nome" not in st.session_state:
+        st.session_state.nome = ""
+    if "ano_nascimento" not in st.session_state:
+        st.session_state.ano_nascimento = 1900
+    if "limpar_campos" not in st.session_state:
+        st.session_state.limpar_campos = False
+    main()
