@@ -6,7 +6,10 @@ def mai():
         page_icon="🌡️",
         layout="centered"
     )
-    
+
+    if "limpar_campos" in st.session_state and st.session_state.limpar_campos:
+        st.session_state.celsius = 0.0
+        st.session_state.limpar_campos = False
 
     st.markdown("""
     <style>
@@ -44,10 +47,10 @@ def mai():
         col_btn1, col_btn2 = st.columns(2)
 
         with col_btn1:
-            calcular = st.button("Converter", key="converter")
+            calcular = st.button("Converter", use_container_width=True)
         
         with col_btn2:
-            limpar = st.button("Limpar Campos", key="limpar_campos")
+            limpar = st.button("Limpar Campos", use_container_width=True)
         
         if calcular:
             if not celsius:
