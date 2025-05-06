@@ -6,6 +6,11 @@ Repositorio criado para resolver as atividades de Python da Escola da Nuvem.
 # 🐍 Repositório de Exercícios de Python
 
 Este repositório contém uma coleção de exercícios práticos em Python, organizados para facilitar o aprendizado e a prática da linguagem. Além disso, fornecemos instruções detalhadas para configurar o ambiente de desenvolvimento utilizando Git e Pyenv.
+E para rodar os execíciros que utilizam `Streamlit`, execute o comando abaixo:
+
+```bash
+streamlit run pasta/arquivo.py
+```
 
 ## 📁 Estrutura do Repositório
 
